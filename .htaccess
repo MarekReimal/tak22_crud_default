@@ -1,0 +1,27 @@
+# fail millest alga programm, määrab kuidas kausta sisu näidatakse
+
+Options +FollowSymLinks
+
+# Ei naita kausta sisu. Can't find the contents of the folder
+Options -Indexes -MultiViews
+
+RewriteEngine On
+
+RewriteBase /tak22_crud_default/
+# siin muutsime
+
+# Kaust mis käitub teisiti. A folder that behaves differently
+#RewriteCond %{REQUEST_URI} "/font-free-5.0.13/"
+#RewriteRule (.*) $1 [L]
+
+# Fail mis peab käituma teisiti
+# A folder that behaves differently
+# RewriteCond %{REQUEST_URI} "process.php"
+# RewriteRule (.*) $1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(.*)$ index.php/$1 [L]
+RewriteRule ^(.+)\.(php) index.php?%{QUERY_STRING} [L]
